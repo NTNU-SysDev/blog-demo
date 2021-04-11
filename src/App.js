@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import { Switch, Route } from "react-router-dom";
+import { Navbar } from "./components/Navbar/Navbar";
+import { Admin } from "./pages/Admin/Admin";
+import Detail from "./pages/Detail/Detail";
+import { Home } from "./pages/Home/Home";
+import { NewPost } from "./pages/NewPost/NewPost";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	return (
+		<>
+			{/* Navbar is common between all pages so its outside of switch */}
+			<Navbar />
+
+			<main>
+				{/* Main content of the page */}
+				<Switch>
+					<Route exact path="/" component={Home} />
+          <Route path="/admin" component={Admin} />
+          <Route path="/new-post" component={NewPost} />
+					<Route path="/search/:searchQuery" component={Home} />
+          <Route path="/post/:id" component={Detail} />
+				</Switch>
+			</main>
+		</>
+	);
 }
 
 export default App;
